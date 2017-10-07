@@ -7,5 +7,6 @@ function btnReiniciar(tempo) {
         $("#tempo").text(tempo);
         cronometro(campo,tempo);
         console.log("reiniciar clicado");
+        campo.toggleClass("campo-desativado");
     });
 }

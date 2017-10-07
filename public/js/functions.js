@@ -9,6 +9,7 @@ function cronometro(campo, tempo) {
                 campo.attr("disabled", true);
                 clearInterval(cronomtroID);
                 $("#btn-reiniciar").attr("disabled",false);
+                campo.toggleClass("campo-desativado");
             }
         }, 1000);
     });
