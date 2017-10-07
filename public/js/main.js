@@ -1,10 +1,15 @@
-//console.log("teste carregamento");
-var frase = $(".frase").text();
-console.log(frase);
-
-var numPalavras = frase.split(" ").length;
-console.log(numPalavras);
-
-var tamanhoFrase = $("#tamanho-frase").text(numPalavras);
-console.log(tamanhoFrase);
-
+var campo = $(".campo-digitacao");
+var tempo = $("#tempo").text();
+/*
+$(document).ready(function () {
+    attValorFrase(campo);
+    contadores(campo);
+    cronometro(campo, tempo);
+    btnReiniciar(tempo);
+});*/
+$(function () {
+    attValorFrase(campo);
+    contadores(campo);
+    cronometro(campo, tempo);
+    btnReiniciar(tempo);
+});
