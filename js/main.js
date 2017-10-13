@@ -12,4 +12,6 @@ $(function () {
     contadores(campo);
     cronometro(campo, tempo);
     btnReiniciar(tempo);
+    marcadores(campo);
 });
+

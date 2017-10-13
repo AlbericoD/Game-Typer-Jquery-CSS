@@ -1,6 +1,6 @@
 function cronometro(campo, tempo) {
     campo.one('focus', function () {
-        $("#btn-reiniciar").attr("disabled",true);
+        $("#btn-reiniciar").attr("disabled", true);
         var tempoRestante = tempo;
         var cronomtroID = setInterval(function () {
             tempoRestante--;
@@ -8,11 +8,15 @@ function cronometro(campo, tempo) {
             if (tempoRestante == 0) {
                 campo.attr("disabled", true);
                 clearInterval(cronomtroID);
-                $("#btn-reiniciar").attr("disabled",false);
-                campo.toggleClass("campo-desativado");
+                fimJogo();
             }
         }, 1000);
     });
+}
+function fimJogo() {
+    $("#btn-reiniciar").attr("disabled", false);
+    campo.toggleClass("campo-desativado");
+    inserePlacar();
 }
 function contadores(campo) {
     campo.on("input", function () {
@@ -29,4 +33,56 @@ function attValorFrase() {
     var tamanhoFrase = $("#tamanho-frase").text(numPalavras);
     var campo = $(".campo-digitacao");
     var tempo = $("#tempo").text();
+}
+function marcadores(campo) {
+    var frase = $(".frase").text();
+    campo.on("input", function () {
+        var digitado = campo.val();
+        var comparavel = frase.substr(0, digitado.length);
+        if (digitado == comparavel) {
+            campo.addClass("campo-correto");
+            campo.removeClass("campo-errado");
+        } else {
+            campo.addClass("campo-errado");
+            campo.removeClass("campo-correto");
+        }
+
+    });
+}
+function inserePlacar() {
+    var tabela = $(".placar").find("tbody");
+    var usuario = "Alberico";
+    var nPalavras = $("#contador-palavras").text();
+    var linha = novaLinha(usuario, nPalavras);
+    linha.find(".btn-remover").click(btnRemoverLinha);
+    tabela.prepend(linha);
+    $(".placar").slideDown(500);
+    scrollPlacar();
+}
+
+function novaLinha(usuario, palavras) {
+    var linha = $("<tr>");
+    var colunaUsuario = $("<td>").text(usuario);
+    var colunaPalavras = $("<td>").text(palavras);
+    var colunaRemover = $("<td>");
+
+    var link = $("<a>").attr("href", "#").addClass("btn-remover");
+    var icone = $("<i>").addClass("small").addClass("material-icons").text("delete");
+
+    link.append(icone);
+    colunaRemover.append(link);
+    linha.append(colunaUsuario);
+    linha.append(colunaPalavras);
+    linha.append(colunaRemover);
+    return linha;
+
+}
+
+function scrollPlacar() {
+    var posicaoPlacar = $(".placar").offset().top;
+    $("body").animate(
+        {
+            scrollTop: posicaoPlacar + "px"
+        }, 1000
+    );
 }

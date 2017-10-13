@@ -1,6 +1,6 @@
 .frase{
     font-size: 20px;
-
+    text-align: left;
     height: 150px;
 }
 .campo-digitacao{
@@ -12,4 +12,16 @@
 }
 .icones{
     vertical-align: middle;
+}
+.campo-correto{
+    border: 3px solid green;
+}
+.campo-errado{
+    border: 3px solid red;
+}
+.placar{
+    display: none;
+}
+body{
+    overflow: scroll;
 }
